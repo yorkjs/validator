@@ -3,5 +3,5 @@ export function getType(value: any) {
 }
 
 export function isObject(value: any) {
-  return getType(value) === 'object'
+  return value && getType(value) === 'object'
 }
