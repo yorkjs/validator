@@ -38,7 +38,7 @@ import { Validator } from '@yorkjs/validator'
 ```js
 import {
   Validator,
-} from 'x-validator'
+} from '@yorkjs/validator'
 
 const validator = new Validator()
 
@@ -199,7 +199,7 @@ import {
   Validator,
   checkString,
   checkInteger,
-} from 'x-validator'
+} from '@yorkjs/validator'
 
 const validator = new Validator()
 
