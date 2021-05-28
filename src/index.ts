@@ -15,7 +15,11 @@ import {
 
 import {
   Rule,
+  ArrayRule,
+  BooleanRule,
   EnumRule,
+  IntegerRule,
+  NumberRule,
   StringRule,
   Message,
   Handler,
@@ -59,7 +63,7 @@ class Validator {
 
   }
 
-  validate(data: Record<string, any>, rules: Record<string, string | any[] | RegExp | Rule>, messages: Record<string, Message>) {
+  validate(data: Record<string, any>, rules: Record<string, string | any[] | RegExp | ArrayRule | BooleanRule | EnumRule | IntegerRule | NumberRule | StringRule>, messages?: Record<string, Message>) {
 
     let errors: Record<string, string> | void
 

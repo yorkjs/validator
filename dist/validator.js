@@ -10,11 +10,13 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.Validator = {}));
 }(this, (function (exports) { 'use strict';
 
+  var ref = Object.prototype;
+  var toString = ref.toString;
   function getType(value) {
-      return Object.prototype.toString.call(value).toLowerCase().slice(8, -1);
+      return toString.call(value).toLowerCase().slice(8, -1);
   }
   function isObject(value) {
-      return getType(value) === 'object';
+      return value && getType(value) === 'object' ? true : false;
   }
 
   function checkArray(rule, value) {

@@ -4,11 +4,12 @@
  * Released under the MIT License.
  */
 
+const { toString } = Object.prototype;
 function getType(value) {
-    return Object.prototype.toString.call(value).toLowerCase().slice(8, -1);
+    return toString.call(value).toLowerCase().slice(8, -1);
 }
 function isObject(value) {
-    return getType(value) === 'object';
+    return value && getType(value) === 'object' ? true : false;
 }
 
 function checkArray(rule, value) {
