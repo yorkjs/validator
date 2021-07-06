@@ -71,7 +71,10 @@ const errors = validator.validate(
     age: {
       type: '年龄类型错误',
       min: '年龄最小为 18 岁',
-      max: '年龄最大为 100 岁'
+      max: function (rule) {
+        // 可配置函数，方便读取 rule 动态输出错误信息
+        return '年龄最大为 ' + rule.max + ' 岁'
+      }
     }
   }
 )
