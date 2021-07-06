@@ -369,3 +369,31 @@ test('validate dateTime', () => {
   }
 
 })
+
+test('custom error message', () => {
+
+  let errors = validator.validate(
+    {
+      name: '12345678',
+    },
+    {
+      name: {
+        type: 'string',
+        max: 3,
+      },
+    },
+    {
+      name: {
+        max: function (rule: any) {
+          return 'error' + rule.max
+        }
+      }
+    }
+  )
+
+  expect(errors).not.toBe(undefined)
+  if (errors) {
+    expect(errors.name).toBe('error3')
+  }
+
+})

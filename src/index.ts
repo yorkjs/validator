@@ -121,14 +121,27 @@ class Validator {
       if (reason) {
 
         let message = messages && messages[ key ] && messages[ key ][ reason ]
-        if (typeof message !== 'string') {
+        if (typeof message !== 'string' && typeof message !== 'function') {
           message = this.messages[ rule.type ] && this.messages[ rule.type ][ reason ]
         }
 
         if (!errors) {
           errors = {}
         }
-        errors[key] = typeof message === 'string' ? message : reason
+
+        switch (typeof message) {
+          case 'string':
+            errors[key] = message
+            break
+
+          case 'function':
+            errors[key] = message(rule)
+            break
+
+          default:
+            errors[key] = reason
+            break
+        }
 
       }
 

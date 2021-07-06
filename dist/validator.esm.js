@@ -1,5 +1,5 @@
 /**
- * validator.js v0.0.1
+ * validator.js v0.0.2
  * (c) 2021 musicode
  * Released under the MIT License.
  */
@@ -206,13 +206,23 @@ class Validator {
             }
             if (reason) {
                 let message = messages && messages[key] && messages[key][reason];
-                if (typeof message !== 'string') {
+                if (typeof message !== 'string' && typeof message !== 'function') {
                     message = this.messages[rule.type] && this.messages[rule.type][reason];
                 }
                 if (!errors) {
                     errors = {};
                 }
-                errors[key] = typeof message === 'string' ? message : reason;
+                switch (typeof message) {
+                    case 'string':
+                        errors[key] = message;
+                        break;
+                    case 'function':
+                        errors[key] = message(rule);
+                        break;
+                    default:
+                        errors[key] = reason;
+                        break;
+                }
             }
         }
         return errors;
@@ -221,7 +231,7 @@ class Validator {
 /**
  * 版本
  */
-const version = "0.0.1";
+const version = "0.0.2";
 
 export { Validator, checkArray, checkBoolean, checkDate, checkDateTime, checkEnum, checkInteger, checkNumber, checkObject, checkString, version };
 //# sourceMappingURL=validator.esm.js.map

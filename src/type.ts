@@ -35,6 +35,8 @@ export interface StringRule extends Rule {
   custom?: (value: string) => string | void
 }
 
-export type Message = Record<string, string>
+type MessageGenerator = (rule: Rule) => string
+
+export type Message = Record<string, string | MessageGenerator>
 
 export type Handler = (rule: ArrayRule | BooleanRule | EnumRule | IntegerRule | NumberRule | StringRule, value: any, data?: Record<string, any>) => string | undefined

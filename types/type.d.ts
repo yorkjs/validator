@@ -28,5 +28,7 @@ export interface StringRule extends Rule {
     pattern?: RegExp;
     custom?: (value: string) => string | void;
 }
-export declare type Message = Record<string, string>;
+declare type MessageGenerator = (rule: Rule) => string;
+export declare type Message = Record<string, string | MessageGenerator>;
 export declare type Handler = (rule: ArrayRule | BooleanRule | EnumRule | IntegerRule | NumberRule | StringRule, value: any, data?: Record<string, any>) => string | undefined;
+export {};
