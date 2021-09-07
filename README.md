@@ -135,12 +135,15 @@ const errors = validator.validate(
 * `type`：可以是整数或浮点数，`NaN` 会验证失败
 * `min`: 可选，数字的下限
 * `max`: 可选，数字的上限
+* `precision`: 可选，浮点数的最大精度
+
 
 ```js
 {
   type: 'number',
   min: 1,
-  max: 100
+  max: 100,
+  precision: 2
 }
 ```
 
