@@ -1,5 +1,5 @@
 /**
- * validator.js v0.0.2
+ * validator.js v0.0.3
  * (c) 2021 musicode
  * Released under the MIT License.
  */
@@ -124,6 +124,12 @@ function checkNumber(rule, value) {
     if (rule.max !== undefined && value > rule.max) {
         return 'max';
     }
+    if (rule.precision !== undefined) {
+        const parts = ('' + value).split('.');
+        if (parts.length === 2 && parts[1].length > rule.precision) {
+            return 'precision';
+        }
+    }
 }
 
 function checkObject(_, value) {
@@ -192,7 +198,7 @@ class Validator {
                 throw new Error(`${key}'s rule is not found.`);
             }
             let reason;
-            if (data.hasOwnProperty(key)) {
+            if (data[key] !== undefined) {
                 reason = this.rules[rule.type](rule, data[key], data);
             }
             else {
@@ -231,7 +237,7 @@ class Validator {
 /**
  * 版本
  */
-const version = "0.0.2";
+const version = "0.0.3";
 
 export { Validator, checkArray, checkBoolean, checkDate, checkDateTime, checkEnum, checkInteger, checkNumber, checkObject, checkString, version };
 //# sourceMappingURL=validator.esm.js.map

@@ -130,4 +130,25 @@ test('checkNumber', () => {
 
   expect(error).toBe('max')
 
+  error = checkNumber(
+    {
+      type: 'number',
+      precision: 1,
+    },
+    3.14
+  )
+
+  expect(error).toBe('precision')
+
+  // 精度小于 precision 无所谓
+  error = checkNumber(
+    {
+      type: 'number',
+      precision: 3,
+    },
+    3.14
+  )
+
+  expect(error).toBe(undefined)
+
 })

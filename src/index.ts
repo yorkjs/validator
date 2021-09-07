@@ -105,7 +105,7 @@ class Validator {
 
       let reason: string | void
 
-      if (data.hasOwnProperty(key)) {
+      if (data[key] !== undefined) {
         reason = this.rules[ rule.type ](rule, data[ key ], data)
       }
       else {

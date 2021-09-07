@@ -25,6 +25,7 @@ export interface IntegerRule extends Rule {
 export interface NumberRule extends Rule {
   min?: number
   max?: number
+  precision?: number
 }
 
 export interface StringRule extends Rule {

@@ -54,6 +54,7 @@ test('validate integer', () => {
       age3: 30,
       age4: 10.5,
       age5: '123',
+      age6: undefined,
     },
     {
       age1: 'integer',
@@ -98,6 +99,7 @@ test('validate number', () => {
       age4: 10.5,
       age5: '123',
       age8: NaN,
+      age9: 3.1415926
     },
     {
       age1: 'number',
@@ -117,6 +119,10 @@ test('validate number', () => {
         type: 'number',
       },
       age8: 'number',
+      age9: {
+        type: 'number',
+        precision: 2,
+      }
     }
   )
 
@@ -130,6 +136,7 @@ test('validate number', () => {
     expect(errors.age6).toBe('required')
     expect(errors.age7).toBe('required')
     expect(errors.age8).toBe('type')
+    expect(errors.age9).toBe('precision')
   }
 
 })
