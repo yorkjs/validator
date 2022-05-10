@@ -1,6 +1,6 @@
 {
   "name": "@yorkjs/validator",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "validate data",
   "main": "dist/validator.js",
   "module": "dist/validator.esm.js",

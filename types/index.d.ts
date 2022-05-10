@@ -18,5 +18,5 @@ declare class Validator {
 /**
  * 版本
  */
-declare const version = "0.0.3";
+declare const version = "0.0.4";
 export { Validator, checkArray, checkBoolean, checkDate, checkDateTime, checkEnum, checkInteger, checkNumber, checkObject, checkString, version, };

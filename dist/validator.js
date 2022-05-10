@@ -1,6 +1,6 @@
 /**
- * validator.js v0.0.3
- * (c) 2021 musicode
+ * validator.js v0.0.4
+ * (c) 2021-2022 musicode
  * Released under the MIT License.
  */
 
@@ -17,6 +17,11 @@
   }
   function isObject(value) {
       return value && getType(value) === 'object' ? true : false;
+  }
+  function extend(source, target) {
+      for (var key in target) {
+          source[key] = target[key];
+      }
   }
 
   function checkArray(rule, value) {
@@ -83,8 +88,8 @@
   var PATTERN_DATE = /^\d{4}\-\d{2}\-\d{2}$/;
   function checkDate(rule, value) {
       var newRule = {};
-      Object.assign(newRule, rule);
-      Object.assign(newRule, {
+      extend(newRule, rule);
+      extend(newRule, {
           type: 'string',
           pattern: PATTERN_DATE,
       });
@@ -95,8 +100,8 @@
   var PATTERN_DATE_TIME = /^\d{4}\-\d{2}\-\d{2} \d{2}:\d{2}:\d{2}$/;
   function checkDateTime(rule, value) {
       var newRule = {};
-      Object.assign(newRule, rule);
-      Object.assign(newRule, {
+      extend(newRule, rule);
+      extend(newRule, {
           type: 'string',
           pattern: PATTERN_DATE_TIME,
       });
@@ -242,7 +247,7 @@
   /**
    * 版本
    */
-  var version = "0.0.3";
+  var version = "0.0.4";
 
   exports.Validator = Validator;
   exports.checkArray = checkArray;

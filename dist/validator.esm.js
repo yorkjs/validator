@@ -1,6 +1,6 @@
 /**
- * validator.js v0.0.3
- * (c) 2021 musicode
+ * validator.js v0.0.4
+ * (c) 2021-2022 musicode
  * Released under the MIT License.
  */
 
@@ -10,6 +10,11 @@ function getType(value) {
 }
 function isObject(value) {
     return value && getType(value) === 'object' ? true : false;
+}
+function extend(source, target) {
+    for (let key in target) {
+        source[key] = target[key];
+    }
 }
 
 function checkArray(rule, value) {
@@ -76,8 +81,8 @@ function checkString(rule, value) {
 const PATTERN_DATE = /^\d{4}\-\d{2}\-\d{2}$/;
 function checkDate(rule, value) {
     const newRule = {};
-    Object.assign(newRule, rule);
-    Object.assign(newRule, {
+    extend(newRule, rule);
+    extend(newRule, {
         type: 'string',
         pattern: PATTERN_DATE,
     });
@@ -88,8 +93,8 @@ function checkDate(rule, value) {
 const PATTERN_DATE_TIME = /^\d{4}\-\d{2}\-\d{2} \d{2}:\d{2}:\d{2}$/;
 function checkDateTime(rule, value) {
     const newRule = {};
-    Object.assign(newRule, rule);
-    Object.assign(newRule, {
+    extend(newRule, rule);
+    extend(newRule, {
         type: 'string',
         pattern: PATTERN_DATE_TIME,
     });
@@ -237,7 +242,7 @@ class Validator {
 /**
  * 版本
  */
-const version = "0.0.3";
+const version = "0.0.4";
 
 export { Validator, checkArray, checkBoolean, checkDate, checkDateTime, checkEnum, checkInteger, checkNumber, checkObject, checkString, version };
 //# sourceMappingURL=validator.esm.js.map
