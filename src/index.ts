@@ -9,6 +9,7 @@ import { checkObject } from './checkObject'
 import { checkString } from './checkString'
 
 import {
+  extend,
   getType,
   isObject
 } from './util'
@@ -51,9 +52,9 @@ class Validator {
   add(name: string | Record<string, Handler>, handler: Handler | Record<string, Message>, message: Message) {
 
     if (isObject(name)) {
-      Object.assign(this.rules, name)
+      extend(this.rules, name as Record<string, Handler>)
       if (isObject(handler)) {
-        Object.assign(this.messages, handler)
+        extend(this.messages, handler as Record<string, Message>)
       }
     }
     else {

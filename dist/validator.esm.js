@@ -1,5 +1,5 @@
 /**
- * validator.js v0.0.4
+ * validator.js v0.0.5
  * (c) 2021-2022 musicode
  * Released under the MIT License.
  */
@@ -162,9 +162,9 @@ class Validator {
     }
     add(name, handler, message) {
         if (isObject(name)) {
-            Object.assign(this.rules, name);
+            extend(this.rules, name);
             if (isObject(handler)) {
-                Object.assign(this.messages, handler);
+                extend(this.messages, handler);
             }
         }
         else {
@@ -242,7 +242,7 @@ class Validator {
 /**
  * 版本
  */
-const version = "0.0.4";
+const version = "0.0.5";
 
 export { Validator, checkArray, checkBoolean, checkDate, checkDateTime, checkEnum, checkInteger, checkNumber, checkObject, checkString, version };
 //# sourceMappingURL=validator.esm.js.map

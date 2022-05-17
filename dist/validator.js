@@ -1,5 +1,5 @@
 /**
- * validator.js v0.0.4
+ * validator.js v0.0.5
  * (c) 2021-2022 musicode
  * Released under the MIT License.
  */
@@ -168,9 +168,9 @@
   };
   Validator.prototype.add = function (name, handler, message) {
       if (isObject(name)) {
-          Object.assign(this.rules, name);
+          extend(this.rules, name);
           if (isObject(handler)) {
-              Object.assign(this.messages, handler);
+              extend(this.messages, handler);
           }
       }
       else {
@@ -247,7 +247,7 @@
   /**
    * 版本
    */
-  var version = "0.0.4";
+  var version = "0.0.5";
 
   exports.Validator = Validator;
   exports.checkArray = checkArray;
