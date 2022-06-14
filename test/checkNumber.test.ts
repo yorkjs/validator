@@ -54,7 +54,10 @@ test('checkNumber', () => {
     NaN
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkNumber(
     {
@@ -63,7 +66,10 @@ test('checkNumber', () => {
     '1'
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkNumber(
     {
@@ -72,7 +78,10 @@ test('checkNumber', () => {
     true
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkNumber(
     {
@@ -81,7 +90,10 @@ test('checkNumber', () => {
     {}
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkNumber(
     {
@@ -90,7 +102,10 @@ test('checkNumber', () => {
     null
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkNumber(
     {
@@ -99,7 +114,10 @@ test('checkNumber', () => {
     undefined
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkNumber(
     {
@@ -108,7 +126,10 @@ test('checkNumber', () => {
     []
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkNumber(
     {
@@ -118,7 +139,10 @@ test('checkNumber', () => {
     0
   )
 
-  expect(error).toBe('min')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('min')
+  }
 
   error = checkNumber(
     {
@@ -128,7 +152,10 @@ test('checkNumber', () => {
     3
   )
 
-  expect(error).toBe('max')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('max')
+  }
 
   error = checkNumber(
     {
@@ -138,7 +165,10 @@ test('checkNumber', () => {
     3.14
   )
 
-  expect(error).toBe('precision')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('precision')
+  }
 
   // 精度小于 precision 无所谓
   error = checkNumber(

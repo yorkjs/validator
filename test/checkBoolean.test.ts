@@ -9,7 +9,10 @@ test('checkBoolean', () => {
     1
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkBoolean(
     {
@@ -18,7 +21,10 @@ test('checkBoolean', () => {
     'str'
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkBoolean(
     {
@@ -36,7 +42,10 @@ test('checkBoolean', () => {
     {}
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkBoolean(
     {
@@ -45,7 +54,10 @@ test('checkBoolean', () => {
     null
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkBoolean(
     {
@@ -54,7 +66,10 @@ test('checkBoolean', () => {
     undefined
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkBoolean(
     {
@@ -63,7 +78,10 @@ test('checkBoolean', () => {
     []
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkBoolean(
     {
@@ -73,7 +91,10 @@ test('checkBoolean', () => {
     false
   )
 
-  expect(error).toBe('value')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('value')
+  }
 
   error = checkBoolean(
     {
@@ -93,7 +114,10 @@ test('checkBoolean', () => {
     true
   )
 
-  expect(error).toBe('value')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('value')
+  }
 
   error = checkBoolean(
     {

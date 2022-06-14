@@ -9,7 +9,10 @@ test('checkDate', () => {
     1
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkDate(
     {
@@ -18,7 +21,10 @@ test('checkDate', () => {
     '1'
   )
 
-  expect(error).toBe('pattern')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('pattern')
+  }
 
   error = checkDate(
     {

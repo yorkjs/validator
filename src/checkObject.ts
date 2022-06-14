@@ -6,8 +6,11 @@ import {
   Rule
 } from './type'
 
-export function checkObject(_: Rule, value: any) {
+export function checkObject(rule: Rule, value: any) {
   if (!isObject(value)) {
-    return 'type'
+    return {
+      rule,
+      reason: 'type',
+    }
   }
 }

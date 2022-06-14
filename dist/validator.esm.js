@@ -1,5 +1,5 @@
 /**
- * validator.js v0.0.5
+ * validator.js v0.1.0
  * (c) 2021-2022 musicode
  * Released under the MIT License.
  */
@@ -19,14 +19,23 @@ function extend(source, target) {
 
 function checkArray(rule, value) {
     if (!Array.isArray(value)) {
-        return 'type';
+        return {
+            rule,
+            reason: 'type',
+        };
     }
     const { length } = value;
     if (rule.min !== undefined && length < rule.min) {
-        return 'min';
+        return {
+            rule,
+            reason: 'min',
+        };
     }
     if (rule.max !== undefined && length > rule.max) {
-        return 'max';
+        return {
+            rule,
+            reason: 'max',
+        };
     }
     const { itemType } = rule;
     if (!itemType) {
@@ -34,45 +43,72 @@ function checkArray(rule, value) {
     }
     for (let i = 0; i < length; i++) {
         if (getType(value[i]) !== itemType) {
-            return 'itemType';
+            return {
+                rule,
+                reason: 'itemType',
+            };
         }
     }
 }
 
 function checkBoolean(rule, value) {
     if (typeof value !== 'boolean') {
-        return 'type';
+        return {
+            rule,
+            reason: 'type',
+        };
     }
     if (rule.value !== undefined
         && rule.value !== value) {
-        return 'value';
+        return {
+            rule,
+            reason: 'value',
+        };
     }
 }
 
 function checkString(rule, value) {
     if (typeof value !== 'string') {
-        return 'type';
+        return {
+            rule,
+            reason: 'type',
+        };
     }
     if (value === '') {
         // 是否允许为空，默认不允许
         if (rule.empty === true) {
             return;
         }
-        return 'empty';
+        return {
+            rule,
+            reason: 'empty',
+        };
     }
     if (rule.min !== undefined && value.length < rule.min) {
-        return 'min';
+        return {
+            rule,
+            reason: 'min',
+        };
     }
     if (rule.max !== undefined && value.length > rule.max) {
-        return 'max';
+        return {
+            rule,
+            reason: 'max',
+        };
     }
     if (rule.pattern !== undefined && !rule.pattern.test(value)) {
-        return 'pattern';
+        return {
+            rule,
+            reason: 'pattern',
+        };
     }
     if (rule.custom !== undefined) {
-        const result = rule.custom(value);
-        if (result) {
-            return result;
+        const reason = rule.custom(value);
+        if (reason) {
+            return {
+                rule,
+                reason,
+            };
         }
     }
 }
@@ -103,43 +139,70 @@ function checkDateTime(rule, value) {
 
 function checkEnum(rule, value) {
     if (!Array.isArray(rule.values) || rule.values.indexOf(value) < 0) {
-        return 'type';
+        return {
+            rule,
+            reason: 'type',
+        };
     }
 }
 
 function checkInteger(rule, value) {
     if (typeof value !== 'number' || value % 1 !== 0) {
-        return 'type';
+        return {
+            rule,
+            reason: 'type',
+        };
     }
     if (rule.min !== undefined && value < rule.min) {
-        return 'min';
+        return {
+            rule,
+            reason: 'min',
+        };
     }
     if (rule.max !== undefined && value > rule.max) {
-        return 'max';
+        return {
+            rule,
+            reason: 'max',
+        };
     }
 }
 
 function checkNumber(rule, value) {
     if (typeof value !== 'number' || isNaN(value)) {
-        return 'type';
+        return {
+            rule,
+            reason: 'type',
+        };
     }
     if (rule.min !== undefined && value < rule.min) {
-        return 'min';
+        return {
+            rule,
+            reason: 'min',
+        };
     }
     if (rule.max !== undefined && value > rule.max) {
-        return 'max';
+        return {
+            rule,
+            reason: 'max',
+        };
     }
     if (rule.precision !== undefined) {
         const parts = ('' + value).split('.');
         if (parts.length === 2 && parts[1].length > rule.precision) {
-            return 'precision';
+            return {
+                rule,
+                reason: 'precision',
+            };
         }
     }
 }
 
-function checkObject(_, value) {
+function checkObject(rule, value) {
     if (!isObject(value)) {
-        return 'type';
+        return {
+            rule,
+            reason: 'type',
+        };
     }
 }
 
@@ -202,23 +265,26 @@ class Validator {
             if (!isObject(rule) || !rule.type) {
                 throw new Error(`${key}'s rule is not found.`);
             }
-            let reason;
+            let checkResult;
             if (data[key] !== undefined) {
-                reason = this.rules[rule.type](rule, data[key], data);
+                checkResult = this.rules[rule.type](rule, data[key], data);
             }
             else {
                 // 默认必传
                 if (rule.required !== false) {
-                    reason = 'required';
+                    checkResult = {
+                        rule,
+                        reason: 'required',
+                    };
                 }
                 else {
                     continue;
                 }
             }
-            if (reason) {
-                let message = messages && messages[key] && messages[key][reason];
+            if (checkResult) {
+                let message = messages && messages[key] && messages[key][checkResult.reason];
                 if (typeof message !== 'string' && typeof message !== 'function') {
-                    message = this.messages[rule.type] && this.messages[rule.type][reason];
+                    message = this.messages[rule.type] && this.messages[rule.type][checkResult.reason];
                 }
                 if (!errors) {
                     errors = {};
@@ -228,10 +294,10 @@ class Validator {
                         errors[key] = message;
                         break;
                     case 'function':
-                        errors[key] = message(rule);
+                        errors[key] = message(checkResult.rule);
                         break;
                     default:
-                        errors[key] = reason;
+                        errors[key] = checkResult.reason;
                         break;
                 }
             }
@@ -242,7 +308,7 @@ class Validator {
 /**
  * 版本
  */
-const version = "0.0.5";
+const version = "0.1.0";
 
 export { Validator, checkArray, checkBoolean, checkDate, checkDateTime, checkEnum, checkInteger, checkNumber, checkObject, checkString, version };
 //# sourceMappingURL=validator.esm.js.map

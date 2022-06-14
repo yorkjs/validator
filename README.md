@@ -280,7 +280,6 @@ const errors = validator.validate(
 全平台适用，但需要确认以下函数是否存在：
 
 ```
-Object.assign
 Array.isArray
 ```
 

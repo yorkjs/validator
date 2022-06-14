@@ -9,7 +9,10 @@ test('checkDateTime', () => {
     1
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkDateTime(
     {
@@ -18,7 +21,10 @@ test('checkDateTime', () => {
     '1'
   )
 
-  expect(error).toBe('pattern')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('pattern')
+  }
 
   error = checkDateTime(
     {
@@ -27,7 +33,11 @@ test('checkDateTime', () => {
     '2020-10-10'
   )
 
-  expect(error).toBe('pattern')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.rule.pattern).not.toBe(undefined)
+    expect(error.reason).toBe('pattern')
+  }
 
   error = checkDateTime(
     {
@@ -36,7 +46,10 @@ test('checkDateTime', () => {
     '2020-10-10 10:10'
   )
 
-  expect(error).toBe('pattern')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('pattern')
+  }
 
   error = checkDateTime(
     {

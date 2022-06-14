@@ -9,7 +9,10 @@ test('checkObject', () => {
     1
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkObject(
     {
@@ -18,7 +21,10 @@ test('checkObject', () => {
     'str'
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkObject(
     {
@@ -27,7 +33,10 @@ test('checkObject', () => {
     true
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkObject(
     {
@@ -45,7 +54,10 @@ test('checkObject', () => {
     null
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkObject(
     {
@@ -54,7 +66,10 @@ test('checkObject', () => {
     undefined
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkObject(
     {
@@ -63,6 +78,9 @@ test('checkObject', () => {
     []
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
 })

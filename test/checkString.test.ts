@@ -9,7 +9,10 @@ test('checkString', () => {
     1
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkString(
     {
@@ -18,7 +21,10 @@ test('checkString', () => {
     0.1
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkString(
     {
@@ -27,7 +33,10 @@ test('checkString', () => {
     NaN
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkString(
     {
@@ -45,7 +54,10 @@ test('checkString', () => {
     true
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkString(
     {
@@ -54,7 +66,10 @@ test('checkString', () => {
     {}
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkString(
     {
@@ -63,7 +78,10 @@ test('checkString', () => {
     null
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkString(
     {
@@ -72,7 +90,10 @@ test('checkString', () => {
     undefined
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkString(
     {
@@ -81,7 +102,10 @@ test('checkString', () => {
     []
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkString(
     {
@@ -90,7 +114,10 @@ test('checkString', () => {
     ''
   )
 
-  expect(error).toBe('empty')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('empty')
+  }
 
   error = checkString(
     {
@@ -110,7 +137,10 @@ test('checkString', () => {
     '1'
   )
 
-  expect(error).toBe('min')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('min')
+  }
 
   error = checkString(
     {
@@ -120,7 +150,10 @@ test('checkString', () => {
     '1234'
   )
 
-  expect(error).toBe('max')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('max')
+  }
 
   error = checkString(
     {
@@ -139,7 +172,10 @@ test('checkString', () => {
     'abc'
   )
 
-  expect(error).toBe('pattern')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('pattern')
+  }
 
   error = checkString(
     {
@@ -161,7 +197,10 @@ test('checkString', () => {
     '123'
   )
 
-  expect(error).toBe('test')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('test')
+  }
 
   error = checkString(
     {

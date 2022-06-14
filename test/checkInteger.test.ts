@@ -36,7 +36,10 @@ test('checkInteger', () => {
     0.1
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkInteger(
     {
@@ -45,7 +48,10 @@ test('checkInteger', () => {
     -1.1
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkInteger(
     {
@@ -54,7 +60,10 @@ test('checkInteger', () => {
     NaN
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkInteger(
     {
@@ -63,7 +72,10 @@ test('checkInteger', () => {
     '1'
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkInteger(
     {
@@ -72,7 +84,10 @@ test('checkInteger', () => {
     true
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkInteger(
     {
@@ -81,7 +96,10 @@ test('checkInteger', () => {
     {}
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkInteger(
     {
@@ -90,7 +108,10 @@ test('checkInteger', () => {
     null
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkInteger(
     {
@@ -99,7 +120,10 @@ test('checkInteger', () => {
     undefined
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkInteger(
     {
@@ -108,7 +132,10 @@ test('checkInteger', () => {
     []
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkInteger(
     {
@@ -118,7 +145,12 @@ test('checkInteger', () => {
     0
   )
 
-  expect(error).toBe('min')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.rule.type).toBe('integer')
+    expect(error.rule.min).toBe(1)
+    expect(error.reason).toBe('min')
+  }
 
   error = checkInteger(
     {
@@ -128,6 +160,9 @@ test('checkInteger', () => {
     3
   )
 
-  expect(error).toBe('max')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('max')
+  }
 
 })

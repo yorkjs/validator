@@ -22,6 +22,7 @@ import {
   IntegerRule,
   NumberRule,
   StringRule,
+  CheckResult,
   Message,
   Handler,
 } from './type'
@@ -104,26 +105,29 @@ class Validator {
         throw new Error(`${key}'s rule is not found.`)
       }
 
-      let reason: string | void
+      let checkResult: CheckResult | void
 
       if (data[key] !== undefined) {
-        reason = this.rules[ rule.type ](rule, data[ key ], data)
+        checkResult = this.rules[ rule.type ](rule, data[ key ], data)
       }
       else {
         // 默认必传
         if (rule.required !== false) {
-          reason = 'required'
+          checkResult = {
+            rule,
+            reason: 'required',
+          }
         }
         else {
           continue
         }
       }
 
-      if (reason) {
+      if (checkResult) {
 
-        let message = messages && messages[ key ] && messages[ key ][ reason ]
+        let message = messages && messages[ key ] && messages[ key ][ checkResult.reason ]
         if (typeof message !== 'string' && typeof message !== 'function') {
-          message = this.messages[ rule.type ] && this.messages[ rule.type ][ reason ]
+          message = this.messages[ rule.type ] && this.messages[ rule.type ][ checkResult.reason ]
         }
 
         if (!errors) {
@@ -136,11 +140,11 @@ class Validator {
             break
 
           case 'function':
-            errors[key] = message(rule)
+            errors[key] = message(checkResult.rule)
             break
 
           default:
-            errors[key] = reason
+            errors[key] = checkResult.reason
             break
         }
 

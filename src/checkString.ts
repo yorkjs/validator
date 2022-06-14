@@ -5,7 +5,10 @@ import {
 export function checkString(rule: StringRule, value: any) {
 
   if (typeof value !== 'string') {
-    return 'type'
+    return {
+      rule,
+      reason: 'type',
+    }
   }
 
   if (value === '') {
@@ -13,25 +16,40 @@ export function checkString(rule: StringRule, value: any) {
     if (rule.empty === true) {
       return
     }
-    return 'empty'
+    return {
+      rule,
+      reason: 'empty',
+    }
   }
 
   if (rule.min !== undefined && value.length < rule.min) {
-    return 'min'
+    return {
+      rule,
+      reason: 'min',
+    }
   }
 
   if (rule.max !== undefined && value.length > rule.max) {
-    return 'max'
+    return {
+      rule,
+      reason: 'max',
+    }
   }
 
   if (rule.pattern !== undefined && !rule.pattern.test(value)) {
-    return 'pattern'
+    return {
+      rule,
+      reason: 'pattern',
+    }
   }
 
   if (rule.custom !== undefined) {
-    const result = rule.custom(value)
-    if (result) {
-      return result
+    const reason = rule.custom(value)
+    if (reason) {
+      return {
+        rule,
+        reason,
+      }
     }
   }
 

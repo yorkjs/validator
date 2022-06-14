@@ -9,7 +9,10 @@ test('checkArray', () => {
     1
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkArray(
     {
@@ -18,7 +21,10 @@ test('checkArray', () => {
     'str'
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkArray(
     {
@@ -27,7 +33,10 @@ test('checkArray', () => {
     true
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkArray(
     {
@@ -36,7 +45,10 @@ test('checkArray', () => {
     {}
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkArray(
     {
@@ -45,7 +57,10 @@ test('checkArray', () => {
     null
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkArray(
     {
@@ -54,7 +69,10 @@ test('checkArray', () => {
     undefined
   )
 
-  expect(error).toBe('type')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('type')
+  }
 
   error = checkArray(
     {
@@ -73,7 +91,10 @@ test('checkArray', () => {
     []
   )
 
-  expect(error).toBe('min')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('min')
+  }
 
   error = checkArray(
     {
@@ -84,7 +105,10 @@ test('checkArray', () => {
     [1, 2, 3]
   )
 
-  expect(error).toBe('max')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('max')
+  }
 
   error = checkArray(
     {
@@ -95,7 +119,10 @@ test('checkArray', () => {
     [1, 2, 3]
   )
 
-  expect(error).toBe('itemType')
+  expect(error).not.toBe(undefined)
+  if (error) {
+    expect(error.reason).toBe('itemType')
+  }
 
   error = checkArray(
     {

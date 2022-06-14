@@ -5,5 +5,5 @@ module.exports = {
   testPathIgnorePatterns: [
     '/node_modules/'
   ],
-  moduleFileExtensions: ['ts', 'js']
+  moduleFileExtensions: ['ts', 'js'],
 };

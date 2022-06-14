@@ -1,2 +1,5 @@
 import { Rule } from './type';
-export declare function checkObject(_: Rule, value: any): "type" | undefined;
+export declare function checkObject(rule: Rule, value: any): {
+    rule: Rule;
+    reason: string;
+} | undefined;

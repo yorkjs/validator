@@ -9,17 +9,26 @@ import {
 export function checkArray(rule: ArrayRule, value: any) {
 
   if (!Array.isArray(value)) {
-    return 'type'
+    return {
+      rule,
+      reason: 'type',
+    }
   }
 
   const { length } = value
 
   if (rule.min !== undefined && length < rule.min) {
-    return 'min'
+    return {
+      rule,
+      reason: 'min',
+    }
   }
 
   if (rule.max !== undefined && length > rule.max) {
-    return 'max'
+    return {
+      rule,
+      reason: 'max',
+    }
   }
 
   const { itemType } = rule
@@ -29,7 +38,10 @@ export function checkArray(rule: ArrayRule, value: any) {
 
   for (let i = 0; i < length; i++) {
     if (getType(value[ i ]) !== itemType) {
-      return 'itemType'
+      return {
+        rule,
+        reason: 'itemType',
+      }
     }
   }
 
