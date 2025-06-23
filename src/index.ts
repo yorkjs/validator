@@ -67,7 +67,7 @@ class Validator {
 
   validate(data: Record<string, any>, rules: Record<string, string | any[] | RegExp | ArrayRule | BooleanRule | EnumRule | IntegerRule | NumberRule | StringRule>, messages?: Record<string, Message>) {
 
-    let errors: Record<string, string> | void
+    let errors: Record<string, string> | void = undefined
 
     for (let key in rules) {
 

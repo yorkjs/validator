@@ -1,6 +1,6 @@
 /**
  * validator.js v0.1.0
- * (c) 2021-2022 musicode
+ * (c) 2021-2025 musicode
  * Released under the MIT License.
  */
 
@@ -207,6 +207,8 @@ function checkObject(rule, value) {
 }
 
 class Validator {
+    rules;
+    messages;
     constructor() {
         this.rules = {
             int: checkInteger,
@@ -236,7 +238,7 @@ class Validator {
         }
     }
     validate(data, rules, messages) {
-        let errors;
+        let errors = undefined;
         for (let key in rules) {
             const value = rules[key];
             let rule;

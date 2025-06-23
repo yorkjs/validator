@@ -33,7 +33,7 @@ export interface CheckResult {
     rule: Rule;
     reason: string;
 }
-declare type MessageGenerator = (rule: Rule) => string;
-export declare type Message = Record<string, string | MessageGenerator>;
-export declare type Handler = (rule: ArrayRule | BooleanRule | EnumRule | IntegerRule | NumberRule | StringRule, value: any, data?: Record<string, any>) => CheckResult | undefined;
+type MessageGenerator = (rule: Rule) => string;
+export type Message = Record<string, string | MessageGenerator>;
+export type Handler = (rule: ArrayRule | BooleanRule | EnumRule | IntegerRule | NumberRule | StringRule, value: any, data?: Record<string, any>) => CheckResult | undefined;
 export {};

@@ -1,3 +1,5 @@
+import fs from 'fs'
+
 // 根据 tsconfig.json 把 ts 转成 js
 import typescript from 'rollup-plugin-typescript2'
 // 替换代码中的变量
@@ -5,11 +7,11 @@ import replace from '@rollup/plugin-replace'
 // 输出打包后的文件大小
 import filesize from 'rollup-plugin-filesize'
 // ES6 转 ES5
-import buble from '@rollup/plugin-buble'
+import { babel } from '@rollup/plugin-babel'
 // 压缩
 import { terser } from 'rollup-plugin-terser'
 
-import { name, version, author, license } from './package.json'
+const { name, version, author, license } = JSON.parse(fs.readFileSync('./package.json', 'utf-8'))
 
 const moduleName = name.split('/').pop()
 
@@ -71,8 +73,13 @@ else {
       check: false,
       useTsconfigDeclarationDir: true
     }),
-    buble({
-      namedFunctionExpressions: false
+    babel({
+      presets: [
+        '@babel/preset-env', // 转译 ES6+ 语法
+        '@babel/preset-typescript' // 支持 TypeScript
+      ],
+      babelHelpers: 'bundled',
+      extensions: ['.ts', '.js']
     })
   )
   output.push({
@@ -95,7 +102,7 @@ plugins.push(
   filesize(),
 )
 
-module.exports = [
+export default [
   {
     input: 'src/index.ts',
     external: ['url'],
